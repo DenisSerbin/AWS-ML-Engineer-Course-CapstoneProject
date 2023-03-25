@@ -18,11 +18,11 @@ Generated datasets:
 
 ## Project structure
 - [Retriever-Reranker.ipynb](Retriever-Reranker.ipynb) - The main file (jupyter notebook) that calls training and inference scripts for both models, and outputs test results.
-- [uns_train.py](uns_train.py) - The Python script that defines and trains the retriever model.
-- [uns_inference.py](uns_inference.py) - The Python script used by the deployed endpoint of the retriever to create embeddings of topics and content items into vector space.
-- [sup_train.py](sup_train.py) - The Python script that defines and trains the reranker model.
-- [sup_inference.py](sup_inference.py) - The Python script used by the deployed endpoint of the reranker to predict connections between topics and content items.
-- [requirements.txt](requirements.txt) - The text file listing packages necessary for the above scripts.
+- [uns_train.py](Scripts/uns_train.py) - The Python script that defines and trains the retriever model.
+- [uns_inference.py](Scripts/uns_inference.py) - The Python script used by the deployed endpoint of the retriever to create embeddings of topics and content items into vector space.
+- [sup_train.py](Scripts/sup_train.py) - The Python script that defines and trains the reranker model.
+- [sup_inference.py](Scripts/sup_inference.py) - The Python script used by the deployed endpoint of the reranker to predict connections between topics and content items.
+- [requirements.txt](Scripts/requirements.txt) - The text file listing packages necessary for the above scripts.
 
 ## Retriever
 
