@@ -4,13 +4,16 @@ The project is motivated by the Kaggle competition “Learning Equality - Curric
 
 ## Datasets
 
-The training dataset is given in three files:
- 
+The original training dataset is given in three files: 
  - 'topics.csv' - curriculum topics with descriptions,
 - 'content.csv' - content items with descriptions,
 - 'correlations.csv' - an alignment of the topics with the content items.
 
 The files are too large to be uploaded here. They can be downloaded from the competition page https://www.kaggle.com/competitions/learning-equality-curriculum-recommendations/data
+
+Generated datasets:
+- [uns_train.csv](uns_train.csv) - The training data for the retriever model: it consists of a list of *(topic title, content item title)* pairs known to be related.
+- [sup_train.csv](sup_train.csv) - The training data for the reranker model: it consists of a list of *(topic title, content item title)*, where *topic* ranges through all given topics and *content item* is in the list of content items output by the retriever. The pair *(topic title, content item title)* is labeled by 1 if the *topic* and *content item* are related (the pair is listed in the 'correlations.csv' file), or by 0 is the *topic* and *content item* are not related.
 
 ## Project structure
 - [Retriever-Reranker.ipynb](Retriever-Reranker.ipynb) - The main file (jupyter notebook) that calls training and inference scripts for both models, and outputs test results.
