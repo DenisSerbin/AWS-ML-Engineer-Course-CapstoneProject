@@ -26,11 +26,11 @@ Generated datasets:
 
 ## Retriever
 
-A retriever is a model that for a given topic outputs *a significant number* of content items, many of which are not really relevant, but we keep them for the re-ranking stage.
+A retriever is a model that for a given topic outputs *a large number* of content items, many of which are not really relevant, but we keep them for the re-ranking stage.
 
 ### Fine-tuning of a pretrained sentence transformer
 
-First we fine-tune a pretrained model **'paraphrase-distilroberta-base-v2'** from **'HuggingFace Library'** in an unsupervised fashion, on a set of *positive* (topic title, content item title) pairs ([uns_train.csv](uns_train.csv)), that is, the corresponding topic and content item are known to be related.
+First we fine-tune a pretrained model **'paraphrase-distilroberta-base-v2'** from **'HuggingFace Library'** in an unsupervised fashion, on a set of *positive* *(topic title, content item title)* pairs ([uns_train.csv](uns_train.csv)), that is, the corresponding topic and content item are known to be related.
 
 ### Embedding
 
