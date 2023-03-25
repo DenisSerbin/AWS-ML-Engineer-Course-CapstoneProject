@@ -22,7 +22,7 @@ Generated datasets:
 - [uns_inference.py](uns_inference.py) - The Python script used by the deployed endpoint of the retriever to create embeddings of topics and content items into vector space.
 - [sup_train.py](sup_train.py) - The Python script that defines and trains the reranker model.
 - [sup_inference.py](sup_inference.py) - The Python script used by the deployed endpoint of the reranker to predict connections between topics and content items.
-- [requirements.py](requirements.py) - The text file listing packages necessary for the above scripts.
+- [requirements.txt](requirements.txt) - The text file listing packages necessary for the above scripts.
 
 ## Retriever
 
@@ -42,7 +42,11 @@ For every topic we compose a list of its content item neighbors (with respect to
 
 ### Training set for the reranker
 
-For every topic in the [train_topics.csv](GeneratedData/train_topics.csv) list, we label its neighboring content items with either 0, or 1, based on the known correlation with the topic. The result is a training dataset ([sup_train.py](GeneratedData/sup_train.py)) for the reranker model - this is the output of the retriever.
+For every topic in the [train_topics.csv](GeneratedData/train_topics.csv) list, we label its neighboring content items with either 0, or 1, based on the known correlation with the topic. The result is a training dataset ([sup_train.csv](GeneratedData/sup_train.csv)) for the reranker model - this is the output of the retriever.
+
+### Testing set for the reranker
+
+Similarly we create a testing dataset ([sup_test.csv](GeneratedData/sup_test.csv)) for the reranker model based on the [test_topics.csv](GeneratedData/test_topics.csv) list.
 
 ## Reranker
 
@@ -50,7 +54,7 @@ A reranker is a model that filters the output of the retriver. For every pair *(
 
 ### Classifier
 
-We construct a custom classification (0 or 1) model based on **'paraphrase-multilingual-mpnet-base-v2'** from **'HuggingFace Library'** and train it on the [sup_train.py](GeneratedData/sup_train.py) dataset.
+We construct a custom classification (0 or 1) model based on **'paraphrase-multilingual-mpnet-base-v2'** from **'HuggingFace Library'** and train it on the [sup_train.csv](GeneratedData/sup_train.csv) dataset.
 
 ### Trimming of the retriever output
 
