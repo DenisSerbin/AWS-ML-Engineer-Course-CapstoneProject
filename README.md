@@ -10,7 +10,7 @@ The training dataset is given in three files:
 - 'content.csv' - content items with descriptions,
 - 'correlations.csv' - an alignment of the topics with the content items.
 
-All the files can be downloaded from the competition page https://www.kaggle.com/competitions/learning-equality-curriculum-recommendations/data
+The files are too large to be uploaded here. They can be downloaded from the competition page https://www.kaggle.com/competitions/learning-equality-curriculum-recommendations/data
 
 ## Retriever
 
