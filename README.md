@@ -12,7 +12,7 @@ The training dataset is given in three files:
 
 All the files can be downloaded from the competition page https://www.kaggle.com/competitions/learning-equality-curriculum-recommendations/data
 
-## Retriever part
+## Retriever
 
 A retriever is a model that for a given topic outputs *a significant number* of content items, many of which are not really relevant, but we keep them for the re-ranking stage.
 
@@ -31,3 +31,19 @@ For every topic we compose a list of its content item neighbors (with respect to
 ### Training set for the reranker
 
 For every topic in the `train_topics.csv` list, we label its neighboring content items with either 0, or 1, based on the known correlation with the topic. The result is a training dataset (`sup_train.csv`) for the reranker model - this is the output of the retriever.
+
+## Reranker
+
+A reranker is a model that filters the output of the retriver. For every pair (topic, content item), the reranker predicts if the corresponding topic title and content item title are related (outputs 1), or not related (outputs 0).
+
+### Classifier
+
+We construct a custom classification (0 or 1) model based on **'paraphrase-multilingual-mpnet-base-v2'** from **'HuggingFace Library'** and train it on the `sup_train.csv` dataset.
+
+### Trimming of the retriever output
+
+Using the trained reranker model we drop irrelevant content items that were originally output by the retriver.
+
+## Testing
+
+We test the reranker model on the dataset `test_topics.csv` usng the F2 metric.
