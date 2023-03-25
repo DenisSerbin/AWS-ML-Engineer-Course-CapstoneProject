@@ -46,7 +46,7 @@ For every topic in the [train_topics.csv](train_topics.csv) list, we label its n
 
 ## Reranker
 
-A reranker is a model that filters the output of the retriver. For every pair (topic, content item), the reranker predicts if the corresponding topic title and content item title are related (outputs 1), or not related (outputs 0).
+A reranker is a model that filters the output of the retriver. For every pair *(topic, content item)*, the reranker predicts if the corresponding *topic title* and *content item title* are related (outputs 1), or not related (outputs 0).
 
 ### Classifier
 
