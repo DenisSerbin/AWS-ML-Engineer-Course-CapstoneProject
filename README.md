@@ -1,4 +1,4 @@
-# Capstone Project "Information retrieval using a retriever-reranker ensemble in AWS SageMaker"
+# Capstone Project "Information retrieval using a retriever - re-ranker ensemble in AWS SageMaker"
 
 The project is motivated by the Kaggle competition “Learning Equality - Curriculum Recommendations” (https://www.kaggle.com/competitions/learning-equality-curriculum-recommendations), which focuses on building efficient ML models that could match educational content (files and videos in all kinds of formats) to curriculum (K-12) topics.
 
@@ -13,15 +13,14 @@ The files are too large to be uploaded here. They can be downloaded from the com
 
 Generated datasets:
 - [uns_train.csv](GeneratedData/uns_train.csv) - The training data for the retriever model: it consists of a list of *(topic title, content item title)* pairs known to be related.
-- [sup_train.csv](GeneratedData/sup_train.csv) - The training data for the reranker model: it consists of a list of *(topic title, content item title)*, where *topic* ranges through all given topics and *content item* is in the list of content items output by the retriever. The pair *(topic title, content item title)* is labeled by 1 if the *topic* and *content item* are related (the pair is listed in the 'correlations.csv' file), or by 0 is the *topic* and *content item* are not related.
-- [sup_test.csv](GeneratedData/sup_test.csv) - The test data for the reranker model.
+- [sup_train.csv](GeneratedData/sup_train.csv) - The training data for the re-ranker model: it consists of a list of *(topic title, content item title)*, where *topic* ranges through all given topics and *content item* is in the list of content items output by the retriever. The pair *(topic title, content item title)* is labeled by 1 if the *topic* and *content item* are related (the pair is listed in the 'correlations.csv' file), or by 0 is the *topic* and *content item* are not related.
 
 ## Project structure
 - [Retriever-Reranker.ipynb](Retriever-Reranker.ipynb) - The main file (jupyter notebook) that calls training and inference scripts for both models, and outputs test results.
 - [uns_train.py](Scripts/uns_train.py) - The Python script that defines and trains the retriever model.
 - [uns_inference.py](Scripts/uns_inference.py) - The Python script used by the deployed endpoint of the retriever to create embeddings of topics and content items into vector space.
-- [sup_train.py](Scripts/sup_train.py) - The Python script that defines and trains the reranker model.
-- [sup_inference.py](Scripts/sup_inference.py) - The Python script used by the deployed endpoint of the reranker to predict connections between topics and content items.
+- [sup_train.py](Scripts/sup_train.py) - The Python script that defines and trains the re-ranker model.
+- [sup_inference.py](Scripts/sup_inference.py) - The Python script used by the deployed endpoint of the re-ranker to predict connections between topics and content items.
 - [requirements.txt](Scripts/requirements.txt) - The text file listing packages necessary for the above scripts.
 
 ## Retriever
@@ -34,23 +33,23 @@ First we fine-tune a pretrained model **'paraphrase-distilroberta-base-v2'** fro
 
 ### Embedding
 
-Using the fine-tuned model, we map all topic and content item titles to 768-dimensional real-valued vectors and split content title vectors into clusters of 30 nearest neighbors using the KNN algorithm.
+Using the fine-tuned model, we map all topic and content item titles to 768-dimensional real-valued vectors and split content title vectors into clusters of 50 nearest neighbors using the KNN algorithm.
 
 ### Retrieval of relevant content
 
 For every topic we compose a list of its content item neighbors (with respect to the constructed embedding into vector space). Then we split the list of topics into a training set ([train_topics.csv](GeneratedData/train_topics.csv)) and a test set ([test_topics.csv](GeneratedData/test_topics.csv)).
 
-### Training set for the reranker
+### Training set for the re-ranker
 
-For every topic in the [train_topics.csv](GeneratedData/train_topics.csv) list, we label its neighboring content items with either 0, or 1, based on the known correlation with the topic. The result is a training dataset ([sup_train.csv](GeneratedData/sup_train.csv)) for the reranker model - this is the output of the retriever.
+For every topic in the [train_topics.csv](GeneratedData/train_topics.csv) list, we label its neighboring content items with either 0, or 1, based on the known correlation with the topic. The result is a training dataset ([sup_train.csv](GeneratedData/sup_train.csv)) for the re-ranker model - this is the output of the retriever.
 
-### Testing set for the reranker
+### Testing set for the re-ranker
 
-Similarly we create a testing dataset ([sup_test.csv](GeneratedData/sup_test.csv)) for the reranker model based on the [test_topics.csv](GeneratedData/test_topics.csv) list.
+Similarly we create a testing dataset ([sup_test.csv](GeneratedData/sup_test.csv)) for the re-ranker model based on the [test_topics.csv](GeneratedData/test_topics.csv) list.
 
-## Reranker
+## Re-ranker
 
-A reranker is a model that filters the output of the retriver. For every pair *(topic, content item)*, the reranker predicts if the corresponding *topic title* and *content item title* are related (outputs 1), or not related (outputs 0).
+A re-ranker is a model that filters the output of the retriver. For every pair *(topic, content item)*, the re-ranker predicts if the corresponding *topic title* and *content item title* are related (outputs 1), or not related (outputs 0).
 
 ### Classifier
 
