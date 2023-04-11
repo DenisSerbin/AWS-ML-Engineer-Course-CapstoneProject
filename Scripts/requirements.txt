@@ -1,5 +1,0 @@
-sentence-transformers
-transformers
-pandas
-numpy
-boto3
