@@ -29,7 +29,7 @@ A retriever is a model that for a given topic outputs *a large number* of conten
 
 ### Fine-tuning of a pretrained sentence transformer
 
-First we fine-tune a pretrained model **'paraphrase-distilroberta-base-v2'** from **'HuggingFace Library'** in an unsupervised fashion, on a set of *positive* *(topic title, content item title)* pairs ([uns_train.csv](GeneratedData/uns_train.csv)), that is, the corresponding topic and content item are known to be related.
+First we fine-tune a pretrained model **'multi-qa-mpnet-base-dot-v1'** from **'HuggingFace Library'** in an unsupervised fashion, on a set of *positive* *(topic title, content item title)* pairs ([uns_train.csv](GeneratedData/uns_train.csv)), that is, the corresponding topic and content item are known to be related.
 
 ### Embedding
 
@@ -53,7 +53,7 @@ A re-ranker is a model that filters the output of the retriver. For every pair *
 
 ### Classifier
 
-We construct a custom classification (0 or 1) model based on **'paraphrase-multilingual-mpnet-base-v2'** from **'HuggingFace Library'** and train it on the [sup_train.csv](GeneratedData/sup_train.csv) dataset.
+We construct a custom classification (0 or 1) model based on **'all-mpnet-base-v2'** from **'HuggingFace Library'** and train it on the [sup_train.csv](GeneratedData/sup_train.csv) dataset.
 
 ### Trimming of the retriever output
 
